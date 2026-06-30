@@ -3,6 +3,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
 
 typedef struct Node{
     char key[200];
@@ -11,11 +13,16 @@ typedef struct Node{
 }Node;
 
 typedef struct{
-    Node* heads[16];//TODO
-    int loadFactor;
+    Node** heads;//TODO
+    int length; // 16/32/64/...
+    int loadFactor; // how many elements are filled
 }Hashmap;
 
 Hashmap initMap();
+int* get(Hashmap map,char str[100]);
+void set(Hashmap* map, char str[100], int value);
+bool containsKey(Hashmap map, char str[100]);
+bool containsValue(Hashmap map, int value);
 void displayMap(Hashmap map);
 
 #endif

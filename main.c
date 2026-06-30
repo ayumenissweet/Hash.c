@@ -15,10 +15,15 @@ int main(){
         fgets(name,100,stdin);
         name[strcspn(name,"\n")] = '\0';
 
+        if(!strcmp(name,"break"))
+            break;
+        
         printf("Value: ");
         scanf("%d",&value);
         getchar();
 
+        set(&map,name,value);
 
+        displayMap(map);
     }
 }
