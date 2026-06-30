@@ -21,8 +21,10 @@ typedef struct{
 Hashmap initMap();
 int* get(Hashmap map,char str[100]);
 void set(Hashmap* map, char str[100], int value);
+void removeMap(Hashmap *map, char str[100]);
 bool containsKey(Hashmap map, char str[100]);
 bool containsValue(Hashmap map, int value);
+int size(Hashmap map);
 void displayMap(Hashmap map);
 
 #endif

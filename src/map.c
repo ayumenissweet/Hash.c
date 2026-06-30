@@ -21,10 +21,10 @@ Node* createNode(char str[100],int value){
     return p;
 }
 
-int* findNode(Node* head, char str[100]){
+Node* findNode(Node* head, char str[100]){
     while(head != NULL){
         if(!strcmp(head->key,str)){
-            return &(head->value);
+            return head;
         } 
         head = head->next;
     } 
@@ -45,7 +45,7 @@ int* get(Hashmap map,char str[100]){
     if(!map.heads[index]) return NULL;
     if(!strcmp(map.heads[index]->key,str)) return &(map.heads[index]->value);
     //case : inside the linked list
-    return findNode(map.heads[index],str);
+    return &(findNode(map.heads[index],str)->value);
 }
 
 void set(Hashmap* map, char str[100], int value){
@@ -68,7 +68,36 @@ void set(Hashmap* map, char str[100], int value){
 
         //case : no found keys
         getTail((*map).heads[index])->next = createNode(str,value);
+        map->loadFactor++;
     }
+}
+
+void removeMap(Hashmap *map, char str[100]){
+    int index = getRandomIndex(hash(str));
+    if(!(*map).heads[index]) return;
+
+    if(!strcmp((*map).heads[index]->key,str)){
+        if((*map).heads[index]->next == NULL){
+            free(map->heads[index]);
+            map->heads[index] = NULL;
+        }else{
+            Node* p = map->heads[index];
+            map->heads[index] = map->heads[index]->next;
+            free(p);
+        }
+    }else{
+        Node* p = map->heads[index]->next;//head been handled up
+        Node* prev = map->heads[index];
+        while(p != NULL){
+            if(!strcmp(p->key,str)){
+                prev->next = p->next;
+                free(p);
+            }
+            prev = p;
+            p = p->next;
+        }
+    }
+    map->loadFactor--;
 }
 
 int size(Hashmap map){
