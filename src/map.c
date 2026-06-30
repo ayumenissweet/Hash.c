@@ -3,10 +3,10 @@
 
 Hashmap initMap(){
     Hashmap map;
-    map.heads = malloc(sizeof(Node) * 16);
+    map.heads = malloc(sizeof(Node) * BASE);
     map.loadFactor = 0;
-    map.length = 16;
-    for(int i = 0; i < 16; i++){
+    map.length = BASE;
+    for(int i = 0; i < BASE; i++){
         map.heads[i] = NULL;
     }
     return map;
@@ -41,7 +41,7 @@ Node* getTail(Node* head){
 }
 
 int* get(Hashmap map,char str[100]){
-    int index = getRandomIndex(hash(str));
+    int index = getRandomIndex(hash(str),BASE);
     if(!map.heads[index]) return NULL;
     if(!strcmp(map.heads[index]->key,str)) return &(map.heads[index]->value);
     //case : inside the linked list
@@ -49,7 +49,7 @@ int* get(Hashmap map,char str[100]){
 }
 
 void set(Hashmap* map, char str[100], int value){
-    int index = getRandomIndex(hash(str));
+    int index = getRandomIndex(hash(str),BASE);
     if(!(*map).heads[index]){  //NULL
         (*map).heads[index] = createNode(str,value);
         if(!(*map).heads[index]) return;
@@ -73,7 +73,7 @@ void set(Hashmap* map, char str[100], int value){
 }
 
 void removeMap(Hashmap *map, char str[100]){
-    int index = getRandomIndex(hash(str));
+    int index = getRandomIndex(hash(str), BASE);
     if(!(*map).heads[index]) return;
 
     if(!strcmp((*map).heads[index]->key,str)){
@@ -105,16 +105,18 @@ int size(Hashmap map){
 }
 
 bool containsKey(Hashmap map, char str[100]){
-    int index = getRandomIndex(hash(str));
+    int index = getRandomIndex(hash(str),BASE);
     if(!map.heads[index]) return false;
-    return true;
+    return (findNode(map.heads[index],str) ? true : false);
 }
 
 bool containsValue(Hashmap map, int value){
     for(int i = 0; i < map.length; i++){
         if(!map.heads[i]) continue;
-        if(map.heads[i]->value == value){
-            return true;
+        Node* p = map.heads[i];
+        while(p != NULL){
+            if(p->value == value) return true;
+            p = p->next;
         }
     }
     return false;

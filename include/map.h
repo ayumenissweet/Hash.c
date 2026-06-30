@@ -6,6 +6,12 @@
 #include <string.h>
 #include <stdbool.h>
 
+#define BASE 16
+#define MEDIUM 32
+#define BIG 64
+#define LARGE 128
+#define MASSIVE 256
+
 typedef struct Node{
     char key[200];
     int value;

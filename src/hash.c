@@ -1,7 +1,8 @@
 #include "../include/hash.h"
+#include "../include/map.h"
 
 
-uint64_t hash(char *str){
+uint64_t hash(char *str){ 
     uint64_t hash = 5381;
     int c;
     while(c = *str++){
@@ -11,6 +12,6 @@ uint64_t hash(char *str){
     return hash;
 }
 
-int getRandomIndex(uint64_t num){
-    return num % 16;
+int getRandomIndex(uint64_t num, int size){
+    return num % size;
 }
