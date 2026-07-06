@@ -1,31 +1,40 @@
 # Main Problem
+
 Hashmaps are a very modern data structure, it uses a very strong system to store key value pairs cleanly, the data structure is defined like this :
 
-![[image1.png]]
+![Map Structure](image1.png)
 
 ## How it works
+
 - A hashmap is simply a large array
 - each key is **hashed** using a hashing function and then done an operation to turn into a usable index
 
 this idea provides a O(1) performance which is very convenient
 
 ---
+
 ## How hashmaps handle collisions :
 
-![[image2.png]]
-a "collision"  is when two names return the same "index" after hashing them and assigning an index, this hash map solves this by making each bucket a linked list element
+![Collision Handling](image2.png)
+
+a "collision" is when two names return the same "index" after hashing them and assigning an index, this hash map solves this by making each bucket a linked list element
 
 ---
-## Resizing : 
+
+## Resizing :
+
 This hashmaps works like dynamic arrays, the map resizes automatically once the load factor reaches 75%, once that happens, we double the size of the array
 
---- 
+---
+
 ## Utilities :
+
 those are the functions this program currently supports
+
 ```c
 // 1. Initialization
 // Initialize an empty map with default capacity (16)
-Hashmap map = initMap(); 
+Hashmap map = initMap();
 
 //initialize when creating the map
 Hashmap grades = initMapOf({"Aymen", 15}, {"Karim", 18}, {"Melissa", 12});
@@ -53,8 +62,10 @@ containsValue(grades, 11);        // Returns false
 displayMap(grades);               // Prints the entire map structure
 ```
 
---- 
-## What else i want to add : 
+---
+
+## What else i want to add :
+
 those are some of the convenient methods i'd like to add to this program in the future :
 
 - [ ] add an `iterate` method (basically a method that cleanly returns only the valid keys)
@@ -63,8 +74,10 @@ those are some of the convenient methods i'd like to add to this program in the 
 - [ ] add `putIfAbsent` like in python : if key does not exist, insert
 
 ---
-## How to use : 
-in your main program : 
+
+## How to use :
+
+in your main program :
 
 ```c
 #include "include/map.h"
