@@ -6,11 +6,10 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define BASE 16
-#define MEDIUM 32
-#define BIG 64
-#define LARGE 128
-#define MASSIVE 256
+typedef struct{
+    char key[200];
+    int value;
+}MapEntry;
 
 typedef struct Node{
     char key[200];
@@ -32,5 +31,11 @@ bool containsKey(Hashmap map, char str[100]);
 bool containsValue(Hashmap map, int value);
 int size(Hashmap map);
 void displayMap(Hashmap map);
+Hashmap initMapArray_impl(MapEntry *entries, size_t count);
+
+#define initMapOf(...) \
+    (sizeof((MapEntry[]){__VA_ARGS__}) == sizeof(MapEntry) && #__VA_ARGS__[0] == '\0') ? \
+    initMapArray_impl(NULL, 0) : \
+    initMapArray_impl((MapEntry[]){__VA_ARGS__}, sizeof((MapEntry[]){__VA_ARGS__}) / sizeof(MapEntry))
 
 #endif

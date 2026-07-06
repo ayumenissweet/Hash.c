@@ -12,6 +12,6 @@ uint64_t hash(char *str){
     return hash;
 }
 
-int getRandomIndex(uint64_t num, int size){
-    return num % size;
+int getRandomIndex(uint64_t hash, int size){
+    return hash & (size - 1); 
 }
