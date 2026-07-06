@@ -7,12 +7,12 @@
 #include <stdbool.h>
 
 typedef struct{
-    char key[200];
+    char key[100];
     int value;
 }MapEntry;
 
 typedef struct Node{
-    char key[200];
+    char key[100];
     int value;
     struct Node* next;
 }Node;

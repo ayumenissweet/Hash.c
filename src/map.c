@@ -131,6 +131,8 @@ void removeMap(Hashmap *map, char str[100]){
     map->loadFactor--;
 }
 int size(Hashmap map){
+    printf("Map resized\n");
+
     return map.loadFactor;
 }
 bool containsKey(Hashmap map, char str[100]){
