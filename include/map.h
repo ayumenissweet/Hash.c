@@ -23,6 +23,12 @@ typedef struct{
     int loadFactor; // how many elements are filled
 }Hashmap;
 
+typedef struct {
+    Hashmap *map;
+    Node* current;
+    int head;
+}Iterator;
+
 Hashmap initMap();
 int* get(Hashmap map,char str[100]);
 void set(Hashmap* map, char str[100], int value);
@@ -32,6 +38,8 @@ bool containsValue(Hashmap map, int value);
 int size(Hashmap map);
 void displayMap(Hashmap map);
 Hashmap initMapArray_impl(MapEntry *entries, size_t count);
+Iterator iterator_init(Hashmap* map);
+Node* iter_next(Iterator* iter);
 
 #define initMapOf(...) \
     (sizeof((MapEntry[]){__VA_ARGS__}) == sizeof(MapEntry) && #__VA_ARGS__[0] == '\0') ? \

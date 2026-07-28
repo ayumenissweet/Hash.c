@@ -11,6 +11,9 @@ Hashmap initMap(){
     }
     return map;
 }
+
+
+
 Hashmap resizeMap(Hashmap ogMap){
     Hashmap map;
     int length = ogMap.length;
@@ -172,4 +175,23 @@ Hashmap initMapArray_impl(MapEntry *entries, size_t count) {
     }
 
     return map;
+}
+
+Iterator iterator_init(Hashmap *map){
+    return (Iterator) {
+        .map = map,
+        .current = map->heads[0],
+        .head = 0
+    };
+}
+
+Node* iter_next(Iterator *iter){
+    Node* current = iter->current;
+    while(current == NULL && ++iter->head < iter->map->length){
+        current = iter->map->heads[iter->head];
+    }
+    if(current != NULL){
+        iter->current = current->next;
+    }
+    return current;
 }
