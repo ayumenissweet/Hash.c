@@ -69,7 +69,7 @@ Node* getTail(Node* head){
     return head;
 }
 int* get(Hashmap map,char str[100]){
-    int index = getRandomIndex(hash(str),16);
+    int index = getRandomIndex(hash(str),map.length);
     if(!map.heads[index]) return NULL;
     if(!strcmp(map.heads[index]->key,str)) return &(map.heads[index]->value);
     //case : inside the linked list
@@ -104,7 +104,7 @@ void set(Hashmap* map, char str[100], int value){
     }
 }
 void removeMap(Hashmap *map, char str[100]){
-    int index = getRandomIndex(hash(str), 16);
+    int index = getRandomIndex(hash(str), map->length);
     if(!(*map).heads[index]) return;
 
     if(!strcmp((*map).heads[index]->key,str)){
@@ -136,7 +136,7 @@ int size(Hashmap map){
     return map.loadFactor;
 }
 bool containsKey(Hashmap map, char str[100]){
-    int index = getRandomIndex(hash(str),16);
+    int index = getRandomIndex(hash(str),map.length);
     if(!map.heads[index]) return false;
     return (findNode(map.heads[index],str) ? true : false);
 }
